@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<<<<<<< HEAD
+    <script src="./jquery-3.3.1.min.js"></script>
+=======
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+>>>>>>> b1faa9ccb9802e3d5d3689e312bc53fcd1dfe2b9
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播</title>
+    <style id="jsbin-css">
+            .images{
+              display:flex;
+              align-items:flex-start;
+              transition: alll 0.5s
+            }
+            .images > img{
+              vertical-align:top;
+            }
+            .window{
+              width:500px;
+              overflow:hidden;
+            }
+            .red{
+              color:red;
+            }
+            
+            </style>
+</head>
+
+<body>
+    <div class = "window">
+    <div class = "images" id=images>
+        <img src="http://www.cfashion.net/pic/katong/1347.jpg" width = 500 alt="图片1">
+        <img src="http://img1.gtimg.com/1/153/15305/1530572_4000x7000_0.jpg" width = 500 height=313 alt="图片2">
+        <img src="http://pic1.win4000.com/wallpaper/9/58a27cd74ab96.jpg" width=500 alt="图片3">
+    </div>
+</div>
+<span class="pic" id=buttons>
+    <span>第1张</span>
+    <span>第2张</span>
+    <span>第3张</span>
+</span>
+
+<script id="jsbin-javascript">
+var allButtons = $('#buttons > span')
+for(let i = 0;i<allButtons.length;i++){
+    $(allButtons[i]).on('click',function(x){
+        var index = $(x.currentTarget).index()
+        var p = index * -500
+        $('#images').css({
+            transform:'translate(' + p + 'px)'
+            })
+            n = index
+            activeButton(allButtons.eq(n))
+    })
+    }
+    var n = 0;
+    var size = allButtons.length
+    playSlide(n%size)
+    var timerID = setTimer()
+    $('.window').on('mouseenter',function(){
+        window.clearInterval(timerID)
+        })
+        $('.window').on('mouseleave',function(){
+            timerID = setTimer()
+            })
+            function activeButton($button){
+                $button.addClass('red')
+                .siblings('.red').removeClass('red')
+                }
+              
+            function playSlide(index){
+                allButtons.eq(index).trigger('click')
+              }
+              
+            function setTimer(){
+                return setInterval(()=>{
+                    n+=1
+                    playSlide(n%size)
+                    },1500)
+                    }
+</script>    
+</body>
+</html>
